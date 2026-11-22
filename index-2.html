@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#ff6b24"><meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Harmonic Flow — Playlist Architect</title>
+<style>
+:root{--orange:#ff6b24;--yellow:#ffd34e;--bg:#171717;--panel:#242424;--panel2:#303030;--line:#454545;--muted:#aaa39a;--paper:#f7f0e5;--green:#1ed760;--red:#ff6374}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--paper);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{border:0;border-radius:9px;padding:10px 13px;font-weight:800;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
+.app{max-width:1200px;margin:auto;padding:16px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:3px solid var(--orange);padding:5px 0 15px}.brand{display:flex;gap:12px;align-items:center}.mark{width:45px;height:45px;display:grid;place-items:center;background:var(--orange);color:#111;font-weight:1000;font-size:22px;border:3px solid #111;box-shadow:4px 4px 0 var(--yellow);transform:rotate(-4deg)}h1{margin:0;font-size:clamp(21px,4vw,30px);letter-spacing:-.05em}.tag{font-size:10px;color:var(--muted);letter-spacing:.15em;font-weight:800;margin-top:3px}.account{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 10px;color:var(--muted);font-size:11px}
+.btn-orange{background:var(--orange);color:#111}.btn-green{background:var(--green);color:#111}.btn-dark{background:#393939;color:#fff;border:1px solid #555}.btn-quiet{background:#333;color:#eee;border:1px solid #555}.btn-red{background:#542a30;color:#ffd5d8}.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:15px;margin-top:16px}.side,.main{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;min-width:0}.side h2,.section-title{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);margin:0 0 12px}.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}.field label{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.08em}input,select{width:100%;min-width:0;background:#111;color:#fff;border:1px solid #555;border-radius:8px;padding:10px;outline:none}input:focus,select:focus{border-color:var(--orange)}.help{font-size:10px;line-height:1.5;color:var(--muted)}.divider{height:1px;background:var(--line);margin:14px 0}.nav{display:grid;gap:7px}.nav button{text-align:left;background:#333;color:#eee;border:1px solid #4b4b4b}.nav button.active{background:var(--orange);color:#111;border-color:var(--orange)}
+.hero{background:var(--orange);color:#111;border-radius:12px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden}.hero:after{content:"♫";position:absolute;right:16px;top:-30px;font-size:120px;font-weight:1000;opacity:.13}.hero h2{margin:0 0 5px;font-size:22px;letter-spacing:-.04em}.hero p{margin:0;font-size:12px;line-height:1.45;max-width:78%}.modebar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:13px 0}.mode{padding:13px;text-align:left;background:#333;color:#eee;border:1px solid #4c4c4c;border-radius:10px}.mode.active{background:#453021;border:2px solid var(--orange);padding:12px}.mode strong{display:block;font-size:13px}.mode small{display:block;color:#bbb;font-size:10px;margin-top:4px;line-height:1.4}.searchrow{display:grid;grid-template-columns:minmax(0,1fr) 120px auto;gap:8px;margin:10px 0}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.section-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:17px 0 9px}.section-head h3{margin:0;font-size:14px}.tracks{display:grid;gap:8px}.track{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:10px;align-items:center;background:#303030;border:1px solid #484848;border-radius:10px;padding:8px;min-width:0}.cover{width:48px;height:48px;object-fit:cover;border-radius:5px;background:#444}.title{font-size:12px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px}.actions{display:flex;gap:5px;align-items:center}.actions button{padding:7px 10px;font-size:12px}.plus{background:#1d5838;color:#c7ffdc}.minus{background:#542a30;color:#ffd5d8}.spotify-link{color:var(--yellow);font-size:10px;text-decoration:none;font-weight:800}.empty{padding:24px 14px;text-align:center;border:1px dashed #555;border-radius:10px;color:var(--muted);font-size:12px;line-height:1.6}.notice{padding:10px;border-radius:9px;background:#342a1c;border:1px solid #71502b;color:#ffdda6;font-size:10px;line-height:1.5;margin-top:12px}.status{font-size:11px;color:var(--muted);min-height:17px;margin-top:10px}.badge{font-size:9px;border-radius:99px;padding:4px 7px;font-weight:900;letter-spacing:.06em}.safe{background:#214b37;color:#a9f3c6}.flow{background:#33365b;color:#c7caff}.transition{background:#563b21;color:#ffdda6}.playlistbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin:12px 0}.playlist-item{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:8px;align-items:center;padding:9px;border-bottom:1px solid #444}.num{color:var(--orange);font-weight:900}.small{font-size:10px;color:var(--muted)}.meter{height:5px;background:#444;border-radius:9px;overflow:hidden;margin-top:5px}.meter span{display:block;height:100%;background:var(--orange)}footer{text-align:center;color:#777;font-size:9px;margin:15px}
+@media(max-width:760px){.app{padding:11px}.layout{grid-template-columns:1fr}.side{order:2}.main{order:1}.searchrow{grid-template-columns:1fr 100px}.searchrow button{grid-column:1/-1}.hero p{max-width:90%}.track{grid-template-columns:42px minmax(0,1fr)}.cover{width:42px;height:42px}.actions{grid-column:2}.playlistbar{grid-template-columns:1fr}.}
+</style></head>
+<body><div class="app">
+<header class="top"><div class="brand"><div class="mark">HF</div><div><h1>HARMONIC FLOW</h1><div class="tag">PLAYLIST ARCHITECT · DJ SET + LISTENING</div></div></div>
+<div class="account"><span class="pill" id="conn">Spotify bağlı değil</span><button id="login" class="btn-green" onclick="connect()">Spotify'a bağlan</button><button id="logout" class="btn-dark" onclick="logout()" hidden>Çıkış</button></div></header>
+<div class="layout">
+<aside class="side"><h2>Spotify bağlantısı</h2>
+<div class="field"><label>CLIENT ID</label><input id="client" placeholder="Spotify Developer Client ID"></div>
+<div class="field"><label>REDIRECT URI</label><input id="redirect" placeholder="https://senin-siten.com/"></div>
+<button class="btn-orange" style="width:100%" onclick="save()">Ayarları kaydet</button>
+<p class="help">Redirect URI, Spotify Developer Dashboard'da tanımladığın adresle birebir aynı olmalı. HTTPS gerekir.</p>
+<div class="divider"></div><h2>Çalışma alanı</h2><div class="nav">
+<button id="nav-build" class="active" onclick="view('build')">✦ Playlist oluşturucu</button>
+<button id="nav-mylists" onclick="view('mylists')">▤ Spotify listelerim</button>
+</div>
+<div class="notice"><b>Veri kaynağı ayrımı:</b> Spotify arama ve playlist yönetimi için kullanılır. BPM/Camelot önerileri Spotify'dan alınmıyor; lisanslı/bağımsız müzik verisi bağlandığında etkinleşecek.</div>
+</aside>
+<main class="main">
+<div class="hero"><h2 id="heroTitle">Müziğin akışını tasarla.</h2><p id="heroDesc">Bir başlangıç parçası seç. Harmonic Flow, iki farklı dinleme amacına göre playlist'ini kurmana yardım etsin.</p></div>
+<div class="modebar" id="modebar">
+<button class="mode active" id="mode-dj" onclick="setMode('dj')"><strong>🎚 DJ SET MODE</strong><small>Harmonic geçiş, BPM yakınlığı, enerji eğrisi ve set akışı</small></button>
+<button class="mode" id="mode-listen" onclick="setMode('listen')"><strong>♫ LISTENING MODE</strong><small>Tür, atmosfer, ruh hâli ve keşif odaklı playlist</small></button>
+</div>
+<section id="builder">
+<div class="section-title">01 / Başlangıç parçası veya arama</div>
+<div class="searchrow"><input id="q" placeholder="Şarkı veya sanatçı ara..." autocomplete="off"><select id="type"><option value="track">Parça</option><option value="artist">Sanatçı</option><option value="album">Albüm</option></select><button class="btn-orange" id="searchBtn" type="button">ARA</button></div>
+<div class="section-head"><h3 id="resultHeading">Spotify arama sonuçları</h3><span class="pill" id="count">0 sonuç</span></div><div id="results" class="tracks"><div class="empty">Spotify'a bağlanıp bir parça ara. Başlangıç şarkısını “Başlat” ile seç.</div></div>
+<div class="section-head"><h3>02 / Seçilen parça</h3><span class="pill" id="seedCount">Henüz seçilmedi</span></div><div id="seed" class="empty">Henüz başlangıç parçası seçmedin.</div>
+<div class="section-head"><h3>03 / Öneri havuzu</h3><span class="pill">Örnek öneri motoru alanı</span></div>
+<div id="recommendations" class="empty">Başlangıç parçası seçildiğinde, lisanslı müzikal metadata sağlayıcısı bağlanarak öneriler burada gösterilecek. Şimdilik Spotify katalog aramasından parçaları manuel ekleyebilirsin.</div>
+<div class="section-head"><h3>04 / Playlist taslağın</h3><span class="pill" id="draftCount">0 parça</span></div>
+<div class="field"><label>PLAYLIST ADI</label><input id="playlistName" value="Harmonic Flow — New Session"></div>
+<div id="draft" class="empty">Beğendiğin parçaları + ile taslağa ekle.</div>
+<div class="row" style="margin-top:12px"><button class="btn-orange" onclick="createPlaylist()">Spotify'da playlist oluştur</button><button class="btn-quiet" onclick="clearDraft()">Taslağı temizle</button></div>
+</section>
+<section id="mylists" hidden><div class="section-title">Spotify çalma listelerin</div><div class="row"><button class="btn-orange" onclick="loadLists()">Listelerimi getir</button></div><div id="lists" class="tracks" style="margin-top:12px"><div class="empty">Spotify'a bağlanıp listelerini yükle.</div></div></section>
+<div class="status" id="status" role="status"></div>
+</main></div><footer>HARMONIC FLOW · Spotify katalog/playlist entegrasyonu · Müzik analizi bağımsız ve yetkili veri sağlayıcısıyla</footer></div>
+<script>
+const $=id=>document.getElementById(id);let token=null,refresh=null,expiry=0,profile=null,mode='dj',seed=null,draft=[];
+const scopes=['user-read-private','playlist-read-private','playlist-read-collaborative','playlist-modify-public','playlist-modify-private'];
+function msg(s){$('status').textContent=s}function save(){localStorage.setItem('hf_client',$('client').value.trim());localStorage.setItem('hf_redirect',$('redirect').value.trim());msg('Ayarlar kaydedildi.')}
+function config(){return {client:$('client').value.trim(),redirect:$('redirect').value.trim()}}
+function rand(n=64){let a='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',b=crypto.getRandomValues(new Uint8Array(n));return [...b].map(x=>a[x%a.length]).join('')}
+async function challenge(s){let d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return btoa(String.fromCharCode(...new Uint8Array(d))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+async function connect(){let c=config();if(!c.client||!c.redirect){msg('Client ID ve Redirect URI gir.');return}if(location.protocol!=='https:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1'){msg('Spotify OAuth için HTTPS gerekir; HTML dosyasını doğrudan açma.');return}
+let v=rand(),st=rand(24);sessionStorage.setItem('hf_v',v);sessionStorage.setItem('hf_state',st);
+let u=new URL('https://accounts.spotify.com/authorize');u.search=new URLSearchParams({client_id:c.client,response_type:'code',redirect_uri:c.redirect,scope:scopes.join(' '),state:st,code_challenge_method:'S256',code_challenge:await challenge(v)});location.href=u}
+function setToken(d){token=d.access_token;refresh=d.refresh_token||refresh;expiry=Date.now()+((d.expires_in||3600)-60)*1000;sessionStorage.setItem('hf_token',token);if(refresh)sessionStorage.setItem('hf_refresh',refresh);sessionStorage.setItem('hf_exp',expiry)}
+async function auth(){if(!token)token=sessionStorage.getItem('hf_token');if(!refresh)refresh=sessionStorage.getItem('hf_refresh');if(!expiry)expiry=+(sessionStorage.getItem('hf_exp')||0);if(token&&Date.now()<expiry)return token;if(!refresh)throw Error('Oturum sona erdi. Yeniden bağlan.');let r=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({client_id:config().client,grant_type:'refresh_token',refresh_token:refresh})}),d=await r.json();if(!r.ok)throw Error(d.error_description||'Token yenilenemedi');setToken(d);return token}
+async function api(path,opts={}){let t=await auth(),r=await fetch('https://api.spotify.com/v1'+path,{...opts,headers:{Authorization:'Bearer '+t,'Content-Type':'application/json',...(opts.headers||{})}}),d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error?.message||'Spotify API '+r.status);return d}
+async function callback(){let p=new URLSearchParams(location.search),code=p.get('code');if(p.get('error')){msg('Spotify giriş hatası: '+p.get('error'));return}if(!code)return;if(p.get('state')!==sessionStorage.getItem('hf_state')){msg('OAuth state doğrulaması başarısız.');return}
+try{let r=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({client_id:config().client,grant_type:'authorization_code',code,redirect_uri:config().redirect,code_verifier:sessionStorage.getItem('hf_v')})}),d=await r.json();if(!r.ok)throw Error(d.error_description||'Token alınamadı');setToken(d);history.replaceState({},'',location.pathname);await who()}catch(e){msg('Giriş başarısız: '+e.message)}}
+async function who(){try{profile=await api('/me');$('conn').textContent='Bağlı: '+(profile.display_name||profile.id);$('login').hidden=true;$('logout').hidden=false;msg('Spotify bağlantısı hazır.')}catch(e){msg(e.message)}}
+function logout(){token=refresh=null;profile=null;['hf_token','hf_refresh','hf_exp'].forEach(k=>sessionStorage.removeItem(k));$('conn').textContent='Spotify bağlı değil';$('login').hidden=false;$('logout').hidden=true;msg('Bağlantı kapatıldı.')}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function setMode(m){mode=m;$('mode-dj').classList.toggle('active',m==='dj');$('mode-listen').classList.toggle('active',m==='listen');$('heroTitle').textContent=m==='dj'?'Bir sonraki geçişi tasarla.':'Müziğin ruh hâlini yakala.';$('heroDesc').textContent=m==='dj'?'Ton, tempo ve enerji sürekliliğine göre set akışı kur.':'Tür, atmosfer ve keşif üzerinden dinleme listesi oluştur.';renderSeed()}
+async function search(){
+  const q=$('q').value.trim();
+  if(!q){msg('Arama terimi gir.');$('q').focus();return}
+  const btn=$('searchBtn');
+  btn.disabled=true;btn.textContent='ARANIYOR…';
+  msg('Spotify kataloğunda aranıyor: '+q);
+  try{
+    const params=new URLSearchParams({q,type:$('type').value,limit:'20'});
+    const d=await api('/search?'+params.toString());
+    const key=$('type').value+'s';
+    const items=d[key]?.items||[];
+    $('count').textContent=items.length+' sonuç';
+    $('resultHeading').textContent='Spotify arama sonuçları';
+    renderTracks(items);
+    msg(items.length ? items.length+' sonuç bulundu.' : 'Bu aramayla eşleşen sonuç bulunamadı.');
+  }catch(e){
+    console.error('Harmonic Flow search error:',e);
+    msg('Arama hatası: '+(e.message||String(e)));
+  }finally{
+    btn.disabled=false;btn.textContent='ARA';
+  }
+}
+function trackCard(t,kind='search'){let artists=(t.artists||[]).map(a=>a.name).join(', '),img=t.album?.images?.[0]?.url||'',dur=t.duration_ms?Math.floor(t.duration_ms/60000)+':'+String(Math.floor(t.duration_ms/1000)%60).padStart(2,'0'):'';return `<article class="track"><img class="cover" src="${esc(img)}" alt=""><div style="min-width:0"><div class="title">${esc(t.name)}</div><div class="meta">${esc(artists)} · ${esc(t.album?.name||'')} ${dur?'· '+dur:''}</div></div><div class="actions">${kind==='search'?`<button class="btn-quiet" onclick="chooseSeed('${esc(t.id)}')">Başlat</button><button class="plus" onclick="addTrack('${esc(t.uri)}')">+</button>`:`<button class="minus" onclick="removeTrack('${esc(t.uri)}')">−</button>`}</div></article>`}
+let lastItems=[];
+function renderTracks(items){lastItems=items;$('results').innerHTML=items.length?items.map(t=>trackCard(t)).join(''):'<div class="empty">Sonuç yok.</div>'}
+async function chooseSeed(id){let t=lastItems.find(x=>x.id===id);if(!t)return;seed=t;renderSeed();msg('Başlangıç parçası seçildi. Müzikal öneri verisi henüz bağlı değil.')}
+function renderSeed(){if(!seed){$('seed').textContent='Henüz başlangıç parçası seçmedin.';$('seedCount').textContent='Henüz seçilmedi';return}
+$('seedCount').textContent='1 başlangıç parçası';$('seed').innerHTML=trackCard(seed,'seed')+`<div class="notice">Seçilen mod: <b>${mode==='dj'?'DJ Set':'Listening'}</b>. Spotify API, bu parça için BPM/Camelot/enerji analizini sağlamıyor. Bu nedenle şu an otomatik müzikal eşleşme uydurmuyoruz. Bu alan bağımsız, lisanslı metadata sağlayıcısı bağlanınca gerçek öneriler gösterecek.</div>`}
+async function addTrack(uri){if(draft.some(x=>x.uri===uri))return msg('Bu parça taslakta zaten var.');let t=lastItems.find(x=>x.uri===uri);if(t)draft.push(t);renderDraft();msg('Parça taslağa eklendi.')}
+function removeTrack(uri){draft=draft.filter(x=>x.uri!==uri);renderDraft()}
+function clearDraft(){draft=[];renderDraft()}
+function renderDraft(){$('draftCount').textContent=draft.length+' parça';$('draft').innerHTML=draft.length?draft.map((t,i)=>`<div class="playlist-item"><span class="num">${String(i+1).padStart(2,'0')}</span><div style="min-width:0"><div class="title">${esc(t.name)}</div><div class="meta">${esc((t.artists||[]).map(a=>a.name).join(', '))}</div></div><button class="minus" onclick="removeTrack('${esc(t.uri)}')">−</button></div>`).join(''):'<div class="empty">Beğendiğin parçaları + ile taslağa ekle.</div>'}
+async function createPlaylist(){if(!draft.length)return msg('Önce taslağa en az bir parça ekle.');if(!profile)return msg('Önce Spotify hesabına bağlan.');try{let p=await api('/me/playlists',{method:'POST',body:JSON.stringify({name:$('playlistName').value.trim()||'Harmonic Flow Playlist',description:'Created with Harmonic Flow',public:false})});await api('/playlists/'+p.id+'/items',{method:'POST',body:JSON.stringify({uris:draft.map(t=>t.uri)})});msg('Playlist Spotify hesabında oluşturuldu: '+p.name)}catch(e){msg('Playlist oluşturulamadı: '+e.message)}}
+function view(v){$('builder').hidden=v!=='build';$('mylists').hidden=v!=='mylists';$('nav-build').classList.toggle('active',v==='build');$('nav-mylists').classList.toggle('active',v==='mylists')}
+async function loadLists(){try{let d=await api('/me/playlists?limit=50');$('lists').innerHTML=(d.items||[]).map(p=>`<div class="track"><img class="cover" src="${esc(p.images?.[0]?.url||'')}" alt=""><div style="min-width:0"><div class="title">${esc(p.name)}</div><div class="meta">${p.tracks?.total??0} parça · ${esc(p.owner?.display_name||'')}</div></div><a class="spotify-link" target="_blank" rel="noopener" href="${esc(p.external_urls?.spotify||'#')}">AÇ ↗</a></div>`).join('')||'<div class="empty">Liste bulunamadı.</div>'}catch(e){msg('Playlist listesi alınamadı: '+e.message)}}
+async function init(){
+  $('client').value=localStorage.getItem('hf_client')||'';
+  $('redirect').value=localStorage.getItem('hf_redirect')||location.origin+location.pathname;
+  $('searchBtn').addEventListener('click',search);
+  $('q').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();search();}});
+  await callback();
+  if(sessionStorage.getItem('hf_token'))await who();
+  renderDraft();
+}
+init().catch(e=>{console.error('Harmonic Flow init error:',e);msg('Uygulama başlatılamadı: '+(e.message||String(e)));});
+</script></body></html>

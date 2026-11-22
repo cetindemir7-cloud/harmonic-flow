@@ -74,7 +74,7 @@ async function search(){
   btn.disabled=true;btn.textContent='ARANIYOR…';
   msg('Spotify kataloğunda aranıyor: '+q);
   try{
-    const params=new URLSearchParams({q,type:$('type').value,limit:'20'});
+    const params=new URLSearchParams({q,type:$('type').value,limit:'10'});
     const d=await api('/search?'+params.toString());
     const key=$('type').value+'s';
     const items=d[key]?.items||[];
